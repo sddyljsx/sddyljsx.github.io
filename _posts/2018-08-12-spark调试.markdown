@@ -1,0 +1,47 @@
+---
+layout: post
+title:  "spark调试"
+date:   2018-08-12 11:42:19 +0800
+categories: spark
+---
+####    源码项目调试
+
+​         在源代码项目对源码修改后用idea直接进行调试工作
+
+#####          clone源码到本地并编译
+
+​             `git clone git@github.com:apache/spark.git`
+
+​             `./build/mvn -DskipTests clean package`
+
+#####          idea导入工程
+
+​             `File -> Open -> {spark dir}/pom.xml -> Open as Project`
+
+​             过程中会出现sbt project detect，忽略这个，我们使用maven组织工程，导入完成后项目目录如下：
+
+![屏幕快照 2018-07-15 下午12.37.43](https://ws2.sinaimg.cn/large/006tKfTcly1ftagd6c0upj30va15ujxe.jpg)             
+
+#####          运行example程序
+
+​         下面尝试运行SparkSQLExample：
+
+![屏幕快照 2018-07-15 下午1.00.29](https://ws3.sinaimg.cn/large/006tKfTcly1ftags0b1k9j31ki12ugyu.jpg)
+
+​         编辑 run configure如下：
+![屏幕快照 2018-07-15 下午1.14.11](https://ws2.sinaimg.cn/large/006tKfTcly1ftah1o3g40j31bu14y7cg.jpg)
+
+​         -Dspark.master=local 使用local模式运行
+
+​         运行之前需要做一件很重要的事情，将example的依赖全部**由provided改为compile**，将这些包全部打入工程中才能正常运行(也可以更改example的pom文件，但是不是很全，还会缺一些库)
+
+![屏幕快照 2018-07-15 下午3.52.30](https://ws3.sinaimg.cn/large/006tKfTcly1ftam633nd2j31kw0zwqei.jpg)
+
+​          完成这些工作后，直接就可以run了。调试也非常简单，直接加断点debug就好
+
+![屏幕快照 2018-07-15 下午1.49.31](https://ws4.sinaimg.cn/large/006tKfTcly1ftam0xrai6j31kw0xbtpw.jpg)
+
+​           
+
+
+
