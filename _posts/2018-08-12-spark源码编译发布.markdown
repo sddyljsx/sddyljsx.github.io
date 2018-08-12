@@ -1,0 +1,78 @@
+---
+layout: post
+title:  "spark源码编译发布"
+date:   2018-08-12 11:42:19 +0800
+categories: spark
+---
+##### 源码
+
+将项目源码clone源码到本地
+
+项目地址：https://github.com/apache/spark
+
+```
+git clone git@github.com:apache/spark.git
+```
+
+
+
+##### 编译
+
+spark项目同时支持maven和sbt两种方式，以maven为例：
+
+最简单的编译：
+
+```
+./build/mvn -DskipTests clean package
+```
+
+ 使用 -D 和 -P参数定制不同的编译版本：
+
+```
+# Apache Hadoop 2.6.X
+./build/mvn -Pyarn -DskipTests clean package
+
+# Apache Hadoop 2.7.X and later
+./build/mvn -Pyarn -Phadoop-2.7 -Dhadoop.version=2.7.3 -DskipTests clean package
+
+# With Hive 1.2.1 support
+./build/mvn -Pyarn -Phive -Phive-thriftserver -DskipTests clean package
+```
+
+编译子项目：
+
+上述命令为全量编译，我们可以选择只编译某个子模块：
+
+```
+./build/mvn -pl :spark-streaming_2.11 clean install
+```
+
+
+
+##### 发布
+
+```
+./dev/make-distribution.sh --name custom-spark --pip --r --tgz -Psparkr -Phadoop-2.7 -Phive -Phive-thriftserver -Pmesos -Pyarn -Pkubernetes
+```
+
+执行上述命令，会在dist目录生成发布软件包，与在spark官网下载的软件包是一样的。
+
+需要注意：
+
+1. 安装 R 和 pip 环境
+
+   <https://blog.csdn.net/duxu24/article/details/53611510>
+
+2. R安装插件： install.packages('knitr')  install.packages("rJava") 
+
+   <https://github.com/hannarud/r-best-practices/wiki/Installing-RJava-(Ubuntu)>
+
+3. 如果觉得1 2 麻烦，可以不编译 pip和r package，即不支持python和r 
+```
+./dev/make-distribution.sh --name custom-spark  --tgz -Psparkr -Phadoop-2.7 -Phive -Phive-thriftserver -Pmesos -Pyarn -Pkubernetes
+```
+
+
+
+参考：
+https://spark.apache.org/docs/latest/building-spark.html
