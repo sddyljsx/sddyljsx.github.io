@@ -1,4 +1,9 @@
-
+---
+layout: post
+title:  "spark sql 2.3 源码解读 - Optimizer (4)"
+date:   2018-08-15 16:42:19 +0800
+categories: spark
+---
 得到 Resolved Logical Plan 后，将进入优化阶段。后续执行逻辑如下：
 
 ```

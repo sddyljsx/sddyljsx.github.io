@@ -1,4 +1,9 @@
-
+---
+layout: post
+title:  "spark sql 2.3 源码解读 - Planner (5)"
+date:   2018-08-16 16:42:19 +0800
+categories: spark
+---
 Optimizer得到的是最终的 Logical Plan，Planner 将Logical Plan 转化为 Physical Plan。
 
 planner执行plan方法：

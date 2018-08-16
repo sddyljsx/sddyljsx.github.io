@@ -1,4 +1,9 @@
-
+---
+layout: post
+title:  "spark sql 2.3 源码解读 - Preparations (6)"
+date:   2018-08-16 16:42:19 +0800
+categories: spark
+---
 上一章生成的Physical Plan 还需要经过prepareForExecution这一步，做执行前的一些准备工作，代码如下：
 
 ```

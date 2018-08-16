@@ -1,4 +1,9 @@
-
+---
+layout: post
+title:  "spark sql 2.3 源码解读 - Analyzer (3.2)"
+date:   2018-08-14 16:42:19 +0800
+categories: spark
+---
 根据上一节所讲，Analyzer最关键的代码便是rule的实现了。
 
 先整体看一下rule的集合：

@@ -1,10 +1,15 @@
-
+---
+layout: post
+title:  "spark sql 2.3 源码解读 - Analyzer (3.1)"
+date:   2018-08-14 16:42:19 +0800
+categories: spark
+---
 本章将介绍analyzer 结合 catalog 进行绑定,生成 Resolved Logical Plan.
 
 上一步得到的 Unresolved Logical Plan将会执行：
 
 ```
-lazy val analyzed: LogicalPlan = {
+lazy val analyzed: LoarkgicalPlan = {
   print("before analyzed:" + logical.treeString)
   SparkSession.setActiveSession(sparkSession)
   sparkSession.sessionState.analyzer.executeAndCheck(logical)
