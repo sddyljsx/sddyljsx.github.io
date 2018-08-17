@@ -10,7 +10,6 @@ categories: spark
 
 ```
 lazy val analyzed: LoarkgicalPlan = {
-  print("before analyzed:" + logical.treeString)
   SparkSession.setActiveSession(sparkSession)
   sparkSession.sessionState.analyzer.executeAndCheck(logical)
 }

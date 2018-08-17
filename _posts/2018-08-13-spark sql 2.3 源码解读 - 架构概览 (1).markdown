@@ -40,7 +40,6 @@ class QueryExecution(val sparkSession: SparkSession, val logical: LogicalPlan) {
   }
 
   lazy val analyzed: LogicalPlan = {
-    print("before analyzed:" + logical.treeString)
     SparkSession.setActiveSession(sparkSession)
     val l = sparkSession.sessionState.analyzer.executeAndCheck(logical)
     print("after analyzed:" + l.treeString)
